@@ -5,13 +5,18 @@ import Pagination from './Pagination'
 
 function Movies() {
   let [searchText, setSearchText] = React.useState("");
+  let [moviesCount, setCount] = React.useState(9);
   const setGlobalSearchText = (searchText) => {
     setSearchText(searchText);
   }
+  const setGlobalCount = (moviesCount) =>{
+    setCount(moviesCount);
+    
+  }
   return (
     <div>
-    <InputBox setGlobalSearchText={setGlobalSearchText}></InputBox>
-    <MoviesTable searchText={searchText}></MoviesTable>
+    <InputBox setGlobalSearchText={setGlobalSearchText} setGlobalCount={setGlobalCount}></InputBox>
+    <MoviesTable moviesCount={moviesCount} searchText={searchText}></MoviesTable>
     <Pagination></Pagination>
     </div>
   )

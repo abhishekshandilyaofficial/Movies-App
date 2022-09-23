@@ -14,6 +14,7 @@ function MoviesTable(props) {
     
   },[])
   let filteredContent = [];
+  
   if(props.searchText!=""){
     filteredContent = content.filter((movie) =>{
       let lowerCaseTitle = movie.title.toLowerCase();
@@ -23,6 +24,10 @@ function MoviesTable(props) {
   )}else{
     filteredContent = content;
   }
+  if(content){
+    filteredContent = filteredContent.slice(0,props.moviesCount);
+  }
+  
   return (
     <div>
     {

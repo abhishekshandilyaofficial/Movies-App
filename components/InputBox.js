@@ -1,7 +1,7 @@
 import React from 'react'
 function InputBox(props) {
     let [searchText, setSearchText] = React.useState("");
-    let [numberOfItems, setNumberOfItems] = React.useState(4);
+    let [numberOfItems, setNumberOfItems] = React.useState(9);
 
     const handleText = (e) => {
         //local input change karta hai -> ui
@@ -11,8 +11,9 @@ function InputBox(props) {
     }
     const handleCount = (e) => {
         setNumberOfItems(e.target.value);
+        props.setGlobalCount(e.target.value);
     }
-
+    
   return (
    <>
         <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-3 rounded">New</button>
