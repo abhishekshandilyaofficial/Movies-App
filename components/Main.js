@@ -6,7 +6,12 @@ function Main() {
   const [cGenre, setGenre] = React.useState("");
 
   const setGlobalGenre = (nGenre) => {
-    setGenre(nGenre)
+    if(nGenre == "All Genre"){
+      setGenre("");
+    }else{
+      setGenre(nGenre)
+    }
+    
   }
   return (
     <div className='flex'>

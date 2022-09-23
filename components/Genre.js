@@ -14,7 +14,8 @@ function Genre(props) {
   }, [])
   return (
     <div className='Genre'>
-      <div className='mr-6 font-bold border-2 w-40 h-8 text-center hover:bg-blue-700'>Genre</div>
+      <div className='mr-6 font-bold border-2 w-40 h-8 text-center hover:bg-blue-700'
+       onClick={sendGenre}>All Genre</div>
       {isLoaded == true ? <div className='font-bold'>Loading...</div>:
         content.map(function(genres){
           return <div className='mr-6 font-bold border-2 border-t-0 w-40 h-8 text-center hover:bg-blue-700'
