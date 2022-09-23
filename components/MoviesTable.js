@@ -15,18 +15,31 @@ function MoviesTable(props) {
   },[])
   let filteredContent = [];
   
-  if(props.searchText!=""){
+  
+  if(content){
+    /**Searching  */
+  if(props.searchText != ""){
     filteredContent = content.filter((movie) =>{
       let lowerCaseTitle = movie.title.toLowerCase();
       let lowerCaseSearchText = props.searchText.toLowerCase();
+      /**movie(title) -> lowercase */
       return lowerCaseTitle.includes(lowerCaseSearchText);
     }
   )}else{
     filteredContent = content;
   }
-  if(content){
+    //*******genre********/
+    if(props.cGenre != ""){
+      filteredContent = filteredContent.filter(
+        function(movie){
+          return movie.genre.name == props.cGenre;
+        }
+      )
+    }
+    /********Number logic********/
     filteredContent = filteredContent.slice(0,props.moviesCount);
   }
+  
   
   return (
     <div>
