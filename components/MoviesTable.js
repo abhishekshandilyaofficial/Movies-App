@@ -13,10 +13,15 @@ function MoviesTable(props) {
     setContent(response.movies);
     
   },[])
-  let filteredContent = [];
+  const deleteMovie = (tobeDeletedMovieId) => {
+    let restofTheMovies = content.filter((movie) => movie._id !== tobeDeletedMovieId);
+    setContent(restofTheMovies);
+  }
   
   
+  let filteredContent;
   if(content){
+    filteredContent = content;
     /**Searching  */
   if(props.searchText != ""){
     filteredContent = content.filter((movie) =>{
@@ -25,18 +30,17 @@ function MoviesTable(props) {
       /**movie(title) -> lowercase */
       return lowerCaseTitle.includes(lowerCaseSearchText);
     }
-  )}else{
-    filteredContent = content;
-  }
+  )}
+    
     //*******genre********/
     if(props.cGenre != ""){
       filteredContent = filteredContent.filter(
         function(movie){
-          return movie.genre.name == props.cGenre;
+          return movie.genre.name.trim() == props.cGenre.trim();
         }
       )
     }
-    /********Number logic********/
+    /********Number of elements logic********/
     filteredContent = filteredContent.slice(0,props.moviesCount);
   }
   
@@ -58,13 +62,17 @@ function MoviesTable(props) {
         </thead>
         <tbody>
         {filteredContent.map(function(movie,idx){
-            return <tr>
+            return <tr key={movie._id}>
             <td className='mx-2 px-2 text-center'>{idx+1}</td>
             <td className='mx-2 px-2 text-center'>{movie.title}</td>
             <td className='mx-2 px-2 text-center'>{movie.genre.name}</td>
             <td className='mx-2 px-2 text-center'>{movie.numberInStock}</td>
             <td className='mx-2 px-2 text-center'>{movie.dailyRentalRate}</td>
-            <td><button className="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-3 rounded">Delete</button></td>
+            <td><button className="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-3 rounded"
+            onClick={() =>{
+              deleteMovie(movie._id);
+               }}
+            >Delete</button></td>
           </tr>
           })}
         </tbody>
