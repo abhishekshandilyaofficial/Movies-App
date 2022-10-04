@@ -6,12 +6,15 @@ function Genre(props) {
   const sendGenre = (e) => {
     props.setGlobalGenre(e.target.innerText);
   }
-  useEffect(async function(){
-    let response = await fetch('https://react-backend101.herokuapp.com/genres');
-    response = await response.json();
-    setLoaded(false);
-    setContent(response.genres);
-  }, [])
+  useEffect(function(){
+    (async function fn(){
+      let response = await fetch('https://react-backend101.herokuapp.com/genres');
+      response = await response.json();
+      setLoaded(false);
+      setContent(response.genres);
+    })();
+  }
+    , [])
   return (
     <div className='Genre'>
       <div className='mr-6 font-bold border-2 w-40 h-8 text-center hover:bg-blue-700'

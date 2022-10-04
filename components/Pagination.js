@@ -22,7 +22,7 @@ function Pagination(props) {
     <>
       {pagesArr.map(function(pageNumber){
         let css = pageNumber == cPage ? "bg-blue-700 hover:bg-blue-500 font-bold border-2 py-2 px-3 rounded text-white":"hover:bg-blue-500 font-bold border-2 py-2 px-3 rounded"; 
-      return (<button className = {css} onClick={()=>
+      return (<button key = {pageNumber} className = {css} onClick={()=>
       {
         setcPage(pageNumber);
       }
