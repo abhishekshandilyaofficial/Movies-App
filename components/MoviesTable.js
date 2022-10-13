@@ -1,40 +1,14 @@
 import React from 'react'
 
 function MoviesTable(props) {
- let {content, isLoaded, setContent,moviesCount, cPage} = props;
+ let {content, isLoaded, setContent, filteredContent} = props;
   const deleteMovie = (tobeDeletedMovieId) => {
     let restofTheMovies = content.filter((movie) => movie._id !== tobeDeletedMovieId);
     setContent(restofTheMovies);
   }
   
   
-  let filteredContent;
-  if(content){
-    filteredContent = content;
-    /**Searching  */
-  if(props.searchText != ""){
-    filteredContent = content.filter((movie) =>{
-      let lowerCaseTitle = movie.title.toLowerCase();
-      let lowerCaseSearchText = props.searchText.toLowerCase();
-      /**movie(title) -> lowercase */
-      return lowerCaseTitle.includes(lowerCaseSearchText);
-    }
-  )}
-    
-    //*******genre********/
-    if(props.cGenre != ""){
-      filteredContent = filteredContent.filter(
-        function(movie){
-          return movie.genre.name.trim() == props.cGenre.trim();
-        }
-      )
-    }
-    /********Number of elements logic & pagination logic********/
-    let sidx = (cPage-1)*moviesCount;
-    let eidx = sidx+moviesCount;
-    filteredContent = filteredContent.slice(sidx,eidx);
-  }
-  
+
   
   return (
     <div>

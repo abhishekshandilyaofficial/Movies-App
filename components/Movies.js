@@ -31,11 +31,41 @@ function Movies(props) {
     setCount(moviesCount);
     setcPage(1);
   }
+
+  let filteredContent;
+  let totalPagesWaliMovies;
+  if(content){
+    filteredContent = content;
+    /**Searching  */
+  if(searchText != ""){
+    filteredContent = content.filter((movie) =>{
+      let lowerCaseTitle = movie.title.toLowerCase();
+      let lowerCaseSearchText = searchText.toLowerCase();
+      /**movie(title) -> lowercase */
+      return lowerCaseTitle.includes(lowerCaseSearchText);
+    }
+  )}
+    
+    //*******genre********/
+    if(props.cGenre != ""){
+      filteredContent = filteredContent.filter(
+        function(movie){
+          return movie.genre.name.trim() == props.cGenre.trim();
+        }
+      )
+    }
+    totalPagesWaliMovies = filteredContent;
+    /********Number of elements logic & pagination logic********/
+    let sidx = (cPage-1)*moviesCount;
+    let eidx = sidx+moviesCount;
+    filteredContent = filteredContent.slice(sidx,eidx);
+  }
+  
   return (
     <div>
     <InputBox setGlobalSearchText={setGlobalSearchText} setGlobalCount={setGlobalCount}></InputBox>
     <MoviesTable
-     moviesCount={moviesCount} 
+     filteredContent={filteredContent} 
      searchText={searchText} 
      cGenre={props.cGenre}
      content={content}
@@ -46,7 +76,7 @@ function Movies(props) {
      </MoviesTable>
     <Pagination
     moviesCount={moviesCount} 
-    content={content}
+    totalPagesWaliMovies={totalPagesWaliMovies}
     cPage={cPage}
     setcPage={setcPage}
     ></Pagination>

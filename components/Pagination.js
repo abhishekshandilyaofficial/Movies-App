@@ -1,10 +1,11 @@
 import React from 'react'
 
 function Pagination(props) {
-  let {moviesCount, content, cPage, setcPage} = props;
-  let noOfPages = Math.ceil(content.length/moviesCount);
+  let {moviesCount, totalPagesWaliMovies, cPage, setcPage} = props;
+  let noOfPages = Math.ceil(totalPagesWaliMovies.length/moviesCount);
   let pagesArr = [];
-  if(content){
+  if(totalPagesWaliMovies){
+    
     for(let i = 1; i <= noOfPages; i++){
       pagesArr.push(i);
     }

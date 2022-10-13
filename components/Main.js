@@ -8,7 +8,7 @@ function Main() {
 
   const setGlobalGenre = (nGenre) => {
     if(nGenre == "All Genre"){
-      setGenre("");
+      setGenre(""); 
     }else{
       setGenre(nGenre)
     }
